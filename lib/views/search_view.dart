@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SearchView extends StatelessWidget {
   SearchView({super.key});
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SearchView extends StatelessWidget {
               controller: controller,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.all(40),
-                prefixIcon: Icon(Icons.search),
+                suffixIcon: Icon(Icons.search),
                 labelText: 'Search',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
