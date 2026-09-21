@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:weather_app/core/api_consumer.dart';
+import 'package:weather_app/error/error_model.dart';
+import 'package:weather_app/error/exceptions.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
@@ -21,34 +23,7 @@ class DioConsumer extends ApiConsumer {
       );
       return response.data;
     } on DioException catch (e) {
-      switch (e.type) {
-        case DioExceptionType.connectionTimeout:
-          throw UnimplementedError();
-        case DioExceptionType.sendTimeout:
-          throw UnimplementedError();
-        case DioExceptionType.receiveTimeout:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-        case DioExceptionType.badCertificate:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-
-        case DioExceptionType.cancel:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-        case DioExceptionType.connectionError:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-        case DioExceptionType.unknown:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-        case DioExceptionType.transformTimeout:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-        case DioExceptionType.badResponse:
-          // TODO: Handle this case.
-          throw UnimplementedError();
-      }
+      handleDioException(e);
     }
   }
 }
