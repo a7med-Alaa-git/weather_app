@@ -13,6 +13,7 @@ class WeatherCubit extends Cubit<WeatherStates> {
   static WeatherCubit get(BuildContext context) => BlocProvider.of(context);
   WeatherModel? weatherModel;
 
+
   Future<WeatherModel> getWeather(String value) async {
     try {
       emit(WeatherLoadingState());
