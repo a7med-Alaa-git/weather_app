@@ -13,4 +13,3 @@ class MyApp extends StatelessWidget {
     return MaterialApp(debugShowCheckedModeBanner: false, home: HomeView());
   }
 }
-//https://api.weatherapi.com/v1/forecast.json?key=97a80927b16d4411803211322263005&q=london
