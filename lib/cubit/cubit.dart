@@ -8,15 +8,16 @@ import 'package:weather_app/models/weather_model.dart';
 
 class WeatherCubit extends Cubit<WeatherStates> {
   final ApiConsumer api;
+
   WeatherCubit({required this.api}) : super(WeatherInitialState());
 
   static WeatherCubit get(BuildContext context) => BlocProvider.of(context);
   WeatherModel? weatherModel;
 
-
   Future<WeatherModel> getWeather(String value) async {
     try {
       emit(WeatherLoadingState());
+
       final response = await api.get(
         EndPoints.baseUrl,
         queryParameters: {
@@ -24,7 +25,9 @@ class WeatherCubit extends Cubit<WeatherStates> {
           ApiKeys.searchKey: value,
         },
       );
+
       emit(WeatherSuccessState());
+
       weatherModel = WeatherModel.fromJson(response);
     } on ServerException catch (e) {
       emit(WeatherFailureState(message: e.errorModel.errorMessage));
