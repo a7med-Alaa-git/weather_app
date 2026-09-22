@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/core/dio_consumer.dart';
 import 'package:weather_app/cubit/cubit.dart';
 import 'package:weather_app/cubit/states.dart';
 import 'package:weather_app/views/search_view.dart';
@@ -11,7 +13,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => WeatherCubit(),
+      create: (context) => WeatherCubit(api: DioConsumer(dio: Dio())),
       child: BlocConsumer<WeatherCubit, WeatherStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -35,7 +37,9 @@ class HomeView extends StatelessWidget {
               ],
               backgroundColor: Colors.blue,
             ),
-            body: WeatherInfo(),
+            body: WeatherInfo(
+              weatherModel: WeatherCubit.get(context).weatherModel!,
+            ),
           );
         },
       ),

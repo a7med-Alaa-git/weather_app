@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/models/weather_model.dart';
 
 class WeatherInfo extends StatelessWidget {
-  const WeatherInfo({super.key});
+  const WeatherInfo({super.key, required this.weatherModel});
+
+  final WeatherModel weatherModel;
 
   @override
   Widget build(BuildContext context) {
@@ -11,10 +14,13 @@ class WeatherInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            'London',
+            weatherModel.name,
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
-          Text('Updated at 22:26', style: TextStyle(fontSize: 24)),
+          Text(
+            'Updated at ${weatherModel.date}',
+            style: TextStyle(fontSize: 24),
+          ),
           SizedBox(height: 32),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,20 +34,26 @@ class WeatherInfo extends StatelessWidget {
                 ),
               ),
               Text(
-                '17',
+                weatherModel.temp.toString(),
                 style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
               ),
               Column(
                 children: [
-                  Text('Maxtemp : 17', style: TextStyle(fontSize: 16)),
-                  Text('Mintemp : 17', style: TextStyle(fontSize: 16)),
+                  Text(
+                    'Maxtemp : ${weatherModel.maxTemp}',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  Text(
+                    'Mintemp : ${weatherModel.minTemp}',
+                    style: TextStyle(fontSize: 16),
+                  ),
                 ],
               ),
             ],
           ),
           SizedBox(height: 32),
           Text(
-            'Light rain',
+            weatherModel.condition,
             style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
           ),
         ],
